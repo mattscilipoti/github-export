@@ -4,7 +4,7 @@ require "github-export/version"
 
 Gem::Specification.new do |s|
   s.name        = "github-export"
-  s.version     = Github::Export::VERSION
+  s.version     = GHE::VERSION
   s.authors     = ["Matt Scilipoti"]
   s.email       = ["matt@scilipoti.name"]
   s.homepage    = ""

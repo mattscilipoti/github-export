@@ -1,5 +1,3 @@
-module Github
-  module Export
-    VERSION = "0.0.1"
-  end
+module GHE
+  VERSION = "0.0.1"
 end
