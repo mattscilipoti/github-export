@@ -13,7 +13,7 @@ def issues
 end
 
 describe "GET list of issues" do
-  #use_vcr_cassette
+  use_vcr_cassette
 
   subject { issues }
 

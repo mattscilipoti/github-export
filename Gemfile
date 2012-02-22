@@ -4,11 +4,8 @@ source "http://rubygems.org"
 gemspec
 
 group :test do
-  #gem 'fakeweb'
-  #gem 'json'
+  gem 'fakeweb'
   gem 'rspec'
   gem 'ruby-debug19'
-  #gem 'turnip'
   gem 'vcr'
-  #gem 'webmock', '< 1.8' # required by vcr
 end
