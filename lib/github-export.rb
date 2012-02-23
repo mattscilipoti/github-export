@@ -15,6 +15,9 @@ module GHE
       issues.each{|member| block.call(member)}
     end
 
+    def find(number)
+      get_json repo_uri.join(suffix, number.delete('#'))
+    end
 
     def get_json(url, options = {})
       Nestful.json_get url

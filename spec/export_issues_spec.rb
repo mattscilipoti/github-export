@@ -25,4 +25,17 @@ describe "GET list of issues" do
   it "should provide some attributes of each issue" do
     subject.first.should have(16).keys
   end
+
+describe "GET first issue" do
+  use_vcr_cassette
+
+  subject { GHE::Issues.new(test_fixture_repo_uri).find('#1') }
+
+  it "should have the first issue's title" do
+    subject['title'].should eql("TEST ISSUE #1"), subject
+  end
+
+  it "should have 17 keys" do
+    subject.should have(17).keys
+  end
 end
