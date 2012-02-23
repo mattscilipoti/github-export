@@ -35,6 +35,25 @@ describe "GET list of issues" do
     end
   end
 
+  describe '.closed' do
+    use_vcr_cassette 'GET_list_of_closed_issues'
+    subject { GHE::Issues.new(test_fixture_repo_uri).closed }
+
+    it "should limit the list to only closed issues" do
+      subject.should have(1).items
+    end
+
+    it "should populate :closed_at" do
+      subject.first['closed_at'].should == '2012-02-22T22:51:58Z'
+    end
+
+    it "should populate :closed_by" do
+      subject.first['closed_by'].should == 'mattscilipoti'
+    end
+  end
+
+end
+
 describe "GET first issue" do
   use_vcr_cassette
 

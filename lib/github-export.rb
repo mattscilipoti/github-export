@@ -14,6 +14,8 @@ module GHE
       @repo_uri = repo_uri
     end
 
+    def closed
+      issues('state' => 'closed')
     end
 
     def each &block
