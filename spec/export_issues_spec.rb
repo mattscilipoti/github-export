@@ -10,51 +10,64 @@ describe "GET list of issues" do
 
   subject { GHE::Issues.new(test_fixture_repo_uri) }
 
-  it 'should return 1 issue' do
-    subject.should have(1).keys
+  it 'should return 2 issue' do
+    subject.should have(2).keys
   end
 
   it "should have the issue #1's title" do
-    subject.first['title'].should eql("TEST ISSUE #1"), subject.first
-  end
-
-  it "should have the issue #1's closed_by" do
-    subject.first['closed_by'].should eql("")
+    subject.any? {|issue| issue.fetch('title') == "TEST ISSUE #1"}.should be_true, "Couldn't find issue 'TEST ISSUE #1'"
   end
 
   it "should provide some attributes of each issue" do
     subject.first.should have(16).keys
   end
+end
 
-  describe '.to_dir' do
-    use_vcr_cassette
-    it "should generate a file for each issue" do
-      test_dir = GHE.test_export_dir.join('issues')
-      subject.to_dir(test_dir)
-      Pathname.new(File.join(test_dir, '3342511.json')).should be_exist #1
-    end
+describe GHE::Issues, '.to_dir' do
+  use_vcr_cassette
+  it "should generate a file for each issue" do
+    test_dir = GHE.test_export_dir.join('issues')
+    subject.to_dir(test_dir)
+    Pathname.new(File.join(test_dir, '3342511.json')).should be_exist #1
+    Pathname.new(File.join(test_dir, '3361839.json')).should be_exist #3
   end
+end
 
-  describe '.closed' do
-    use_vcr_cassette 'GET_list_of_closed_issues'
+describe  GHE::Issues, '.closed' do
+  describe 'list' do
+    use_vcr_cassette
     subject { GHE::Issues.new(test_fixture_repo_uri).closed }
 
     it "should limit the list to only closed issues" do
       subject.should have(1).items
     end
 
-    it "should populate :closed_at" do
-      subject.first['closed_at'].should == '2012-02-22T22:51:58Z'
+    it "should be #2" do
+      subject.first.fetch('number').should == 2
     end
 
-    it "should populate :closed_by" do
-      subject.first['closed_by'].should == 'mattscilipoti'
+    it "should populate :closed_at" do
+      subject.first.fetch('closed_at').should == '2012-02-22T22:51:58Z'
     end
   end
 
+  describe 'single(#2)' do
+    use_vcr_cassette
+    subject { GHE::Issues.new(test_fixture_repo_uri).find('#2') }
+
+    it "should populate :closed_at" do
+      subject.fetch('closed_at').should == '2012-02-22T22:51:58Z'
+    end
+
+    it "should populate :closed_by" do
+      subject.fetch('closed_by').should == 'mattscilipoti'
+    end
+  end
 end
 
-describe "GET first issue" do
+end
+
+describe  GHE::Issues, "GET first issue" do
   use_vcr_cassette
 
   subject { GHE::Issues.new(test_fixture_repo_uri).find('#1') }

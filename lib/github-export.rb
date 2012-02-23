@@ -11,6 +11,7 @@ module GHE
     include Logging
 
     def initialize(repo_uri)
+      @issues = {}
       @repo_uri = repo_uri
     end
 
@@ -27,7 +28,7 @@ module GHE
     end
 
     def get_json(url, options = {})
-      Nestful.json_get url
+      Nestful.json_get url, options
       #issues = RestClient.get(url, {:accept => :json}.merge(options))
       #JSON.parse(issues)
     end
@@ -58,7 +59,10 @@ module GHE
 private
 
     def issues(options = {})
-      @issues ||= get_json(repo_uri(suffix), options)
+      # need to cache each collection of issues
+      @issues[options.hash] ||= get_json(repo_uri(suffix), options).tap do
+        logger.debug "Retrieving Issue List: #{repo_uri(suffix)}, #{options}"
+      end
     end
   end
 end
