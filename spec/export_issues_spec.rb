@@ -60,7 +60,7 @@ describe  GHE::Issues, '.closed' do
     end
 
     it "should populate :closed_by" do
-      subject.fetch('closed_by').should == 'mattscilipoti'
+      subject['closed_by']['login'].should == 'mattscilipoti'
     end
   end
 end

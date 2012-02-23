@@ -24,7 +24,11 @@ module GHE
     end
 
     def find(number)
-      get_json repo_uri.join(suffix, number.delete('#'))
+      # Ensure the middle string is not an "endpoint"
+      # see: http://apidock.com/ruby/v1_9_2_180/URI/join/class
+      issue_uri = URI.join(repo_uri, "#{suffix}/", number.delete('#'))
+      logger.debug "Finding Issue: #{issue_uri}"
+      get_json issue_uri
     end
 
     def get_json(url, options = {})
