@@ -18,3 +18,5 @@ GHE.module_eval do
   end
 end
 
+FileUtils.remove_dir(GHE.test_export_dir) if Dir.exist?(GHE.test_export_dir)
+
