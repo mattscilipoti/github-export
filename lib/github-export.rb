@@ -1,9 +1,14 @@
 require "github-export/version"
+require "github-export/logging"
 require 'nestful'
+
+log_file = File.expand_path('../log/github-export.log', File.dirname(__FILE__))
+Logging.logger = Logger.new(log_file, 'daily' )
 
 module GHE
   class Issues
     include Enumerable
+    include Logging
 
     def initialize(repo_uri)
       @repo_uri = repo_uri
@@ -40,8 +45,10 @@ module GHE
         # list contains partial info for each issue, retrieving individual
         # being truly restful, the list provides the url.  sweet.
         issue_url = issue.fetch('url')
+        logger.info "Retrieving issue: #{issue_url}"
         issue_json = get_json(issue_url)
         file = File.join(path, "#{issue['id']}.json")
+        logger.info "Writing issue ##{issue['number']} to #{file}"
         File.open(file, "w"){|f| f.write(issue_json)}
       end
     end
