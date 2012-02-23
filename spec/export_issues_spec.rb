@@ -23,17 +23,19 @@ describe "GET list of issues" do
   end
 end
 
-describe GHE::Issues, '.to_dir' do
+describe 'GHE::Issues.to_dir' do
   use_vcr_cassette
+  subject { GHE::Issues.new(test_fixture_repo_uri) }
+
   it "should generate a file for each issue" do
+    subject.to_dir(GHE.test_export_dir)
     test_dir = GHE.test_export_dir.join('issues')
-    subject.to_dir(test_dir)
     Pathname.new(File.join(test_dir, '3342511.json')).should be_exist #1
     Pathname.new(File.join(test_dir, '3361839.json')).should be_exist #3
   end
 end
 
-describe  GHE::Issues, '.closed' do
+describe 'GHE::Issues.closed' do
   describe 'list' do
     use_vcr_cassette
     subject { GHE::Issues.new(test_fixture_repo_uri).closed }
@@ -65,9 +67,7 @@ describe  GHE::Issues, '.closed' do
   end
 end
 
-end
-
-describe  GHE::Issues, "GET first issue" do
+describe 'GHE::Issues', 'GET first issue' do
   use_vcr_cassette
 
   subject { GHE::Issues.new(test_fixture_repo_uri).find('#1') }

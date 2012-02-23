@@ -1,0 +1,106 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/mattscilipoti/github-export-fixture/issues
+    body: 
+    headers:
+      accept:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Thu, 23 Feb 2012 21:34:41 GMT
+      content-type:
+      - application/json; charset=utf-8
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"2de8c16cb46b16d862ea04038166cf1a"'
+      x-ratelimit-remaining:
+      - '4983'
+      content-length:
+      - '1551'
+    body: ! '[{"closed_at":null,"milestone":null,"updated_at":"2012-02-23T19:47:08Z","comments":1,"state":"open","user":{"avatar_url":"https://secure.gravatar.com/avatar/24a6d691246b3d431a9a143fdad483a3?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png","login":"mattscilipoti","url":"https://api.github.com/users/mattscilipoti","gravatar_id":"24a6d691246b3d431a9a143fdad483a3","id":31929},"title":"TEST
+      ISSUE #3 (Open, with Comment)","url":"https://api.github.com/repos/mattscilipoti/github-export-fixture/issues/3","created_at":"2012-02-23T19:47:01Z","assignee":null,"labels":[],"number":3,"id":3361839,"html_url":"https://github.com/mattscilipoti/github-export-fixture/issues/3","body":"TEST
+      NOTE","pull_request":{"patch_url":null,"diff_url":null,"html_url":null}},{"closed_at":null,"milestone":null,"updated_at":"2012-02-22T19:45:28Z","comments":0,"state":"open","user":{"avatar_url":"https://secure.gravatar.com/avatar/24a6d691246b3d431a9a143fdad483a3?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png","login":"mattscilipoti","url":"https://api.github.com/users/mattscilipoti","gravatar_id":"24a6d691246b3d431a9a143fdad483a3","id":31929},"title":"TEST
+      ISSUE #1","url":"https://api.github.com/repos/mattscilipoti/github-export-fixture/issues/1","created_at":"2012-02-22T19:45:28Z","assignee":null,"labels":[],"number":1,"id":3342511,"html_url":"https://github.com/mattscilipoti/github-export-fixture/issues/1","body":"","pull_request":{"patch_url":null,"diff_url":null,"html_url":null}}]'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/mattscilipoti/github-export-fixture/issues/3
+    body: 
+    headers:
+      accept:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Thu, 23 Feb 2012 21:34:41 GMT
+      content-type:
+      - application/json; charset=utf-8
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      x-ratelimit-remaining:
+      - '4982'
+      content-length:
+      - '806'
+      etag:
+      - ! '"aaae247e1cf441c62485c7a4dc73dbbe"'
+    body: ! '{"created_at":"2012-02-23T19:47:01Z","html_url":"https://github.com/mattscilipoti/github-export-fixture/issues/3","closed_at":null,"state":"open","body":"TEST
+      NOTE","assignee":null,"user":{"url":"https://api.github.com/users/mattscilipoti","gravatar_id":"24a6d691246b3d431a9a143fdad483a3","avatar_url":"https://secure.gravatar.com/avatar/24a6d691246b3d431a9a143fdad483a3?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png","id":31929,"login":"mattscilipoti"},"pull_request":{"patch_url":null,"html_url":null,"diff_url":null},"url":"https://api.github.com/repos/mattscilipoti/github-export-fixture/issues/3","updated_at":"2012-02-23T19:47:08Z","closed_by":null,"comments":1,"milestone":null,"labels":[],"number":3,"id":3361839,"title":"TEST
+      ISSUE #3 (Open, with Comment)"}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.github.com:443/repos/mattscilipoti/github-export-fixture/issues/1
+    body: 
+    headers:
+      accept:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.0.12
+      date:
+      - Thu, 23 Feb 2012 21:34:41 GMT
+      content-type:
+      - application/json; charset=utf-8
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      x-ratelimit-limit:
+      - '5000'
+      etag:
+      - ! '"285edcfa3f672c03158f6c2cdd87308d"'
+      x-ratelimit-remaining:
+      - '4981'
+      content-length:
+      - '776'
+    body: ! '{"closed_at":null,"milestone":null,"updated_at":"2012-02-22T19:45:28Z","comments":0,"state":"open","closed_by":null,"user":{"login":"mattscilipoti","avatar_url":"https://secure.gravatar.com/avatar/24a6d691246b3d431a9a143fdad483a3?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png","url":"https://api.github.com/users/mattscilipoti","gravatar_id":"24a6d691246b3d431a9a143fdad483a3","id":31929},"title":"TEST
+      ISSUE #1","url":"https://api.github.com/repos/mattscilipoti/github-export-fixture/issues/1","created_at":"2012-02-22T19:45:28Z","assignee":null,"labels":[],"number":1,"id":3342511,"html_url":"https://github.com/mattscilipoti/github-export-fixture/issues/1","body":"","pull_request":{"patch_url":null,"html_url":null,"diff_url":null}}'
+    http_version: '1.1'
