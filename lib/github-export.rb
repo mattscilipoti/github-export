@@ -33,6 +33,19 @@ module GHE
       'issues'
     end
 
+    def to_dir(base_dir = '.')
+      path = File.join(base_dir, suffix)
+      FileUtils.mkdir_p(path)
+      self.each do |issue|
+        # list contains partial info for each issue, retrieving individual
+        # being truly restful, the list provides the url.  sweet.
+        issue_url = issue.fetch('url')
+        issue_json = get_json(issue_url)
+        file = File.join(path, "#{issue['id']}.json")
+        File.open(file, "w"){|f| f.write(issue_json)}
+      end
+    end
+
 private
 
     def issues(options = {})

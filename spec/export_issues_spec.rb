@@ -26,6 +26,15 @@ describe "GET list of issues" do
     subject.first.should have(16).keys
   end
 
+  describe '.to_dir' do
+    use_vcr_cassette
+    it "should generate a file for each issue" do
+      test_dir = GHE.test_export_dir.join('issues')
+      subject.to_dir(test_dir)
+      Pathname.new(File.join(test_dir, '3342511.json')).should be_exist #1
+    end
+  end
+
 describe "GET first issue" do
   use_vcr_cassette
 
