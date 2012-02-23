@@ -14,7 +14,15 @@ describe "GET list of issues" do
     subject.should have(1).keys
   end
 
-  it "should have the first issue's title" do
+  it "should have the issue #1's title" do
     subject.first['title'].should eql("TEST ISSUE #1"), subject.first
+  end
+
+  it "should have the issue #1's closed_by" do
+    subject.first['closed_by'].should eql("")
+  end
+
+  it "should provide some attributes of each issue" do
+    subject.first.should have(16).keys
   end
 end
