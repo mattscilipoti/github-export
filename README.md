@@ -14,7 +14,7 @@ Usage
 Export to dir (creates a file per issue):
 
     your_repo_uri = 'https://api.github.com/repos/user_name/repo_name'
-    GHE::Issues.new(your_repo_uri).to_dir(dir_to_export_to)
+    GHE::Issues.new(your_repo_uri, :user => 'username', :password => 'PASS').to_dir(dir_to_export_to)
 
 
 GHE::Issues.new(base_api_repo_url) acts as an array of hashes.  It is enumerable.

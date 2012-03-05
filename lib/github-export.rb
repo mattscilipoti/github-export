@@ -11,9 +11,10 @@ module GHE
     include Enumerable
     include Logging
 
-    def initialize(repo_uri)
+    def initialize(repo_uri, resource_options = {})
       @issues = {}
       @repo_uri = repo_uri
+      @resource_options = resource_options
     end
 
     def closed
@@ -33,10 +34,15 @@ module GHE
       get_json issue_uri
     end
 
-    def get_json(url, options = {})
-      Nestful.json_get url, options
-      #issues = RestClient.get(url, {:accept => :json}.merge(options))
+    def get_json(api_url, query_params = {})
+      logger.debug "Retrieving #{api_url}?#{query_params}"
+      n = Nestful::Resource.new(api_url, @resource_options)
+      n.json_get(query_params)
+      #issues = RestClient.get(api_url, {:accept => :json}.merge(options))
       #JSON.parse(issues)
+    rescue => exc
+      logger.error exc
+      raise exc
     end
 
     def repo_uri(suffix = '')
